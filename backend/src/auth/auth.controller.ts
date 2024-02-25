@@ -1,0 +1,38 @@
+import { Controller, Post, Get, Body, Res, HttpStatus } from '@nestjs/common';
+import { EndPoints } from 'src/enums/endPoints.enum';
+import { AuthService } from './auth.service';
+import { Response } from 'express';
+import { Cookies } from 'src/enums/cookies.enum';
+import { LoginPayload, RegisterPayload } from './auth.dto';
+
+@Controller(EndPoints.auth)
+export class AuthController {
+  constructor(private readonly authService: AuthService) {}
+
+  @Post(EndPoints.register)
+  async register(@Body() payLoad: RegisterPayload): Promise<any> {
+    await this.authService.register(payLoad);
+    return { message: 'User registered successfully' };
+  }
+
+  @Post(EndPoints.login)
+  async login(
+    @Body() payLoad: LoginPayload,
+    @Res() res: Response,
+  ): Promise<any> {
+    const token = await this.authService.login(payLoad);
+    res.cookie(Cookies.token, token, {
+      httpOnly: true,
+      maxAge: Number(process.env.EXPIRE_TIME),
+    });
+    return res.status(HttpStatus.OK).json({ token });
+  }
+
+  @Get(EndPoints.logout)
+  async deleteCookie(@Res() res: Response) {
+    res.clearCookie(Cookies.token);
+    return res
+      .status(HttpStatus.OK)
+      .json({ message: 'User logout successfully' });
+  }
+}
