@@ -7,7 +7,7 @@ import {
   GroupTransactionSchema,
   TransactionSchema,
   UserPreferencesSchema,
-} from './finance.model';
+} from '../shared/models/finance.model';
 import { AuthMiddleware } from 'src/shared/middlewares/auth.middleware';
 import { EndPoints } from 'src/enums/endPoints.enum';
 

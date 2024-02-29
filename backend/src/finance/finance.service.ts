@@ -4,7 +4,7 @@ import {
   GroupTransaction,
   Transaction,
   UserPreferences,
-} from './finance.model';
+} from '../shared/models/finance.model';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import {
