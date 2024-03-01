@@ -42,14 +42,14 @@ export class FinanceController {
   }
 
   @Post(EndPoints.transaction)
-  async createTransaction(@Req() req, @Body() payLoad: AddTransactionPayload) {
+  async createTransaction(@Req() req, @Body() payload: AddTransactionPayload) {
     const userId = req.user;
-    return await this.financeService.createTransaction(userId, payLoad);
+    return await this.financeService.createTransaction(userId, payload);
   }
 
   @Patch(EndPoints.transaction)
-  async updateTransaction(@Body() payLoad: UpdateTransactionPayload) {
-    return await this.financeService.updateTransaction(payLoad);
+  async updateTransaction(@Body() payload: UpdateTransactionPayload) {
+    return await this.financeService.updateTransaction(payload);
   }
 
   @Get(EndPoints.getDefaultExpenseCategories)
@@ -76,19 +76,19 @@ export class FinanceController {
   @Post(EndPoints.userPreferences)
   async addUserPreferences(
     @Req() req,
-    @Body() payLoad: AddUserPreferencesPayload,
+    @Body() payload: AddUserPreferencesPayload,
   ) {
     const userId = req.user;
-    return await this.financeService.addUserPreferences(userId, payLoad);
+    return await this.financeService.addUserPreferences(userId, payload);
   }
 
   @Patch(EndPoints.userPreferences)
   async updateUserPreferences(
     @Req() req,
-    @Body() payLoad: UpdateUserPreferencesPayload,
+    @Body() payload: UpdateUserPreferencesPayload,
   ) {
     const userId = req.user;
-    return await this.financeService.updateUserPreferences(userId, payLoad);
+    return await this.financeService.updateUserPreferences(userId, payload);
   }
 
   @Get(EndPoints.groupTransaction)
@@ -100,14 +100,14 @@ export class FinanceController {
   @Post(EndPoints.groupTransaction)
   async addGroupTransaction(
     @Req() req,
-    @Body() payLoad: AddGroupTransactionPayload,
+    @Body() payload: AddGroupTransactionPayload,
   ) {
     const userId = req.user;
-    return await this.financeService.addGroupTransaction(userId, payLoad);
+    return await this.financeService.addGroupTransaction(userId, payload);
   }
 
   @Patch(EndPoints.groupTransaction)
-  async updateGroupTransaction(@Body() payLoad: UpdateGroupTransactionPayload) {
-    return await this.financeService.updateGroupTransaction(payLoad);
+  async updateGroupTransaction(@Body() payload: UpdateGroupTransactionPayload) {
+    return await this.financeService.updateGroupTransaction(payload);
   }
 }
