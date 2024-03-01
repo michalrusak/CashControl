@@ -1,5 +1,7 @@
-<p>
-  <mat-toolbar color="primary">
-    <span>Cash Control</span>
-  </mat-toolbar>
-</p>
+<mat-toolbar color="primary" class="header">
+  <span>Cash Control</span>
+  <nav>
+    <button mat-button routerLink="{{RouterEnum.login}}">Login</button>
+    <button mat-button routerLink="{{RouterEnum.register}}">Register</button>
+  </nav>
+</mat-toolbar>
