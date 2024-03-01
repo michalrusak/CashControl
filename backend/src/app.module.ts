@@ -6,6 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import * as cookieParser from 'cookie-parser';
 import { ConfigModule } from '@nestjs/config';
 import { FinanceModule } from './finance/finance.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { FinanceModule } from './finance/finance.module';
     MongooseModule.forRoot(process.env.DATABASE),
     AuthModule,
     FinanceModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

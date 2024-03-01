@@ -10,4 +10,5 @@ export enum EndPoints {
   getDefaultCurrency = 'get-default-currency',
   userPreferences = 'user-prefenrences',
   groupTransaction = 'group-transaction',
+  user = 'user',
 }
