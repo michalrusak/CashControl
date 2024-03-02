@@ -3,6 +3,7 @@ export enum EndPoints {
   register = 'register',
   login = 'login',
   logout = 'logout',
+  autoLogin = 'auto-login',
   finance = 'finance',
   transaction = 'transaction',
   getDefaultExpenseCategories = 'get-default-expense-categories',

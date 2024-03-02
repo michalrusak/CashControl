@@ -32,7 +32,7 @@ export class AuthService {
     return newUser.save();
   }
 
-  async login(loginPayload: LoginPayload): Promise<string> {
+  async login(loginPayload: LoginPayload): Promise<any> {
     const result = safeParse(LoginPayloadSchema, loginPayload);
 
     if (!result.success) {
@@ -57,6 +57,33 @@ export class AuthService {
       process.env.SECRET_KEY,
       { expiresIn: Number(process.env.EXPIRE_TIME) },
     );
-    return token;
+    return {
+      token,
+      user: {
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      },
+    };
+  }
+
+  async autoLogin(userId: string) {
+    if (!userId) {
+      throw new HttpException('Invalid credentials', HttpStatus.BAD_REQUEST);
+    }
+
+    const user = await this.userModel.findOne({ _id: userId });
+
+    if (!user) {
+      throw new Error('Invalid credentials');
+    }
+
+    return {
+      user: {
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      },
+    };
   }
 }

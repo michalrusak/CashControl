@@ -1,4 +1,12 @@
-import { Controller, Post, Get, Body, Res, HttpStatus } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Get,
+  Body,
+  Res,
+  HttpStatus,
+  Req,
+} from '@nestjs/common';
 import { EndPoints } from 'src/enums/endPoints.enum';
 import { AuthService } from './auth.service';
 import { Response } from 'express';
@@ -20,12 +28,12 @@ export class AuthController {
     @Body() payload: LoginPayload,
     @Res() res: Response,
   ): Promise<any> {
-    const token = await this.authService.login(payload);
+    const { token, user } = await this.authService.login(payload);
     res.cookie(Cookies.token, token, {
       httpOnly: true,
       maxAge: Number(process.env.EXPIRE_TIME),
     });
-    return res.status(HttpStatus.OK).json({ token });
+    return res.status(HttpStatus.OK).json({ user });
   }
 
   @Get(EndPoints.logout)
@@ -34,5 +42,12 @@ export class AuthController {
     return res
       .status(HttpStatus.OK)
       .json({ message: 'User logout successfully' });
+  }
+
+  @Get(EndPoints.autoLogin)
+  async autoLogin(@Req() req, @Res() res: Response) {
+    const userId = req.user;
+    const user = await this.authService.autoLogin(userId);
+    return res.status(HttpStatus.OK).json({ user });
   }
 }

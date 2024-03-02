@@ -22,9 +22,19 @@ export class UserService {
       throw new HttpException('Invalid credentials', HttpStatus.BAD_REQUEST);
     }
 
-    const query: any = { _id: userId };
+    const user = await this.userModel.findOne({ _id: userId });
 
-    return await this.userModel.find(query).exec();
+    if (!user) {
+      throw new Error('Invalid credentials');
+    }
+
+    return {
+      user: {
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      },
+    };
   }
 
   async updateUser(userId: string, updateUserPayload: UpdateUserPayload) {
