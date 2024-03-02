@@ -26,4 +26,10 @@ export class AuthService {
   register(body: RegisterData): Observable<any> {
     return this.http.post<any>(`${this.apiURL}/register`, body);
   }
+
+  autoLogin(): Observable<any> {
+    return this.http.get<any>(`${this.apiURL}/auto-login`, {
+      withCredentials: true,
+    });
+  }
 }

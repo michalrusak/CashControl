@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.reducer';
 import { RouterEnum } from 'src/enums/router.enum';
+import * as AuthActions from '../../store/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -8,6 +11,8 @@ import { RouterEnum } from 'src/enums/router.enum';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
+  constructor(private store: Store<AppState>) {}
+
   RouterEnum = RouterEnum;
 
   form = new FormGroup({
@@ -52,6 +57,8 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    throw new Error('Method not implemented.');
+    this.store.dispatch(
+      AuthActions.login({ loginData: this.form.getRawValue() })
+    );
   }
 }

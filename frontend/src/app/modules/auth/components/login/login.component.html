@@ -3,13 +3,13 @@
     <h2>Login</h2>
     <mat-form-field class="input" appearance="fill">
       <mat-label>Email</mat-label>
-      <input type="email" matInput formControlName="email">
+      <input autocomplete="email" type="email" matInput formControlName="email">
       <mat-error *ngIf="controls.email.invalid">{{getErrorMessage(controls.email)}}</mat-error>
     </mat-form-field>
 
     <mat-form-field class="input" appearance="fill">
       <mat-label>Password</mat-label>
-      <input type="password" matInput formControlName="password">
+      <input autocomplete="current-password" type="password" matInput formControlName="password">
       <mat-error *ngIf="controls.email.invalid">{{getErrorMessage(controls.password)}}</mat-error>
     </mat-form-field>
 
