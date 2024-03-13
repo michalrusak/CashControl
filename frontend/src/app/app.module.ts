@@ -13,6 +13,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { authReducer } from './modules/auth/store/auth.reducer';
 import { AuthEffects } from './modules/auth/store/auth.effects';
 import { NotifierOptions, NotifierModule } from 'angular-notifier';
+import { PreferencesModule } from './modules/preferences/preferences.module';
 
 const customNotifier: NotifierOptions = {
   position: {
@@ -38,6 +39,7 @@ const customNotifier: NotifierOptions = {
     CoreModule,
     HomeModule,
     AuthModule,
+    PreferencesModule,
     StoreModule.forRoot({ auth: authReducer }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     EffectsModule.forRoot(AuthEffects),

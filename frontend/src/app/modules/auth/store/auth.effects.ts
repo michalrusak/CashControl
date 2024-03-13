@@ -27,20 +27,18 @@ export class AuthEffects {
     )
   );
 
-  autoLogin$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(AuthActions.autoLogin),
-        switchMap(() => {
-          return this.authService.autoLogin().pipe(
-            map((user) => {
-              return AuthActions.autoLoginSuccess({ user });
-            }),
-            catchError((err) => of(AuthActions.autoLoginFailure()))
-          );
-        })
-      )
-    // { dispatch: false }
+  autoLogin$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.autoLogin),
+      switchMap(() => {
+        return this.authService.autoLogin().pipe(
+          map((user) => {
+            return AuthActions.autoLoginSuccess({ user });
+          }),
+          catchError((err) => of(AuthActions.autoLoginFailure()))
+        );
+      })
+    )
   );
 
   logout$ = createEffect(() =>
@@ -54,7 +52,7 @@ export class AuthEffects {
             return AuthActions.logoutSuccess();
           }),
           catchError((err) => {
-            this.notifierService.notify('warning', err);
+            this.notifierService.notify('warning', 'Logout failed');
             return of(AuthActions.logoutFailure());
           })
         );

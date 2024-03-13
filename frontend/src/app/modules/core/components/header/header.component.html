@@ -9,7 +9,7 @@
   <button *ngIf="user$ | async as user" mat-button [matMenuTriggerFor]="menu">{{user.firstName}}</button>
   <mat-menu #menu="matMenu">
     <button *ngIf="user$ | async" mat-menu-item routerLink="{{RouterEnum.settings}}">Account settings</button>
-    <button *ngIf="user$ | async" mat-menu-item routerLink="{{RouterEnum.settings}}">Preferences</button>
+    <button *ngIf="user$ | async" mat-menu-item routerLink="{{RouterEnum.preferences}}">Preferences</button>
   </mat-menu>
 
 </mat-toolbar>

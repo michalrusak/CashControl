@@ -5,6 +5,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [],
@@ -15,6 +18,9 @@ import { MatMenuModule } from '@angular/material/menu';
     MatInputModule,
     MatFormFieldModule,
     MatMenuModule,
+    MatCheckboxModule,
+    MatCardModule,
+    MatSelectModule,
   ],
 })
 export class MaterialModule {}

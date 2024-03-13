@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NotifierService } from 'angular-notifier';
+import { AuthService } from 'src/app/modules/core/services/auth.service';
 import { RouterEnum } from 'src/enums/router.enum';
 
 @Component({
@@ -8,6 +11,11 @@ import { RouterEnum } from 'src/enums/router.enum';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private notifierService: NotifierService
+  ) {}
   RouterEnum = RouterEnum;
 
   form = new FormGroup({
@@ -70,6 +78,15 @@ export class RegisterComponent {
   }
 
   onSubmit() {
-    throw new Error('Method not implemented.');
+    this.authService.register(this.form.getRawValue()).subscribe({
+      next: () => {
+        this.router.navigate([RouterEnum.login]);
+        this.notifierService.notify(
+          'success',
+          'Register success, you can login!'
+        );
+      },
+      error: (err) => this.notifierService.notify('error', 'Try again!'),
+    });
   }
 }
