@@ -18,6 +18,8 @@ export type AddUserPreferencesPayload = {
   expenseCategories: string[];
 };
 
+export type ResponseUserPreferences = AddUserPreferencesPayload;
+
 export type UpdateUserPreferencesPayload = Partial<AddUserPreferencesPayload>;
 
 export type AddGroupTransactionPayload = {

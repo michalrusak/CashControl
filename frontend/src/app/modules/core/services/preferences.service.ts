@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EndPoints } from 'src/enums/endPoints.enum';
-import { RouterEnum } from 'src/enums/router.enum';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -39,7 +38,7 @@ export class PreferencesService {
     );
   }
 
-  adduserPreferences(body: any): Observable<any> {
+  addUserPreferences(body: any): Observable<any> {
     return this.http.post<any>(
       `${this.apiURL}/${EndPoints.userPreferences}`,
       body,
@@ -47,5 +46,21 @@ export class PreferencesService {
         withCredentials: true,
       }
     );
+  }
+
+  updateUserPreferences(body: any): Observable<any> {
+    return this.http.patch<any>(
+      `${this.apiURL}/${EndPoints.userPreferences}`,
+      body,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  getUserPreferences(): Observable<any> {
+    return this.http.get<any>(`${this.apiURL}/${EndPoints.userPreferences}`, {
+      withCredentials: true,
+    });
   }
 }

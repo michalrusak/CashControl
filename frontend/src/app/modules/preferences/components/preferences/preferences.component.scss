@@ -14,8 +14,35 @@
   @extend .label-title;
 }
 
+.form-group-custom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.form-group-custom button {
+  width: 60%;
+}
+
+.input-custom {
+  width: 250px;
+}
+
+.break {
+  width: 80%;
+  height: 3px;
+  background-color: grey;
+}
+
 @media (orientation: portrait) or (max-width: map-get($grid-breakpoints, lg)) {
   .form {
     width: 100%;
+  }
+}
+
+@media (max-width: map-get($grid-breakpoints, xs)) {
+  .break {
+    width: 95%;
   }
 }

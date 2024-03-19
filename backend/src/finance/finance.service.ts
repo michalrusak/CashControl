@@ -1,21 +1,22 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { Database } from 'src/enums/database.enum';
+import { safeParse } from 'valibot';
 import {
   GroupTransaction,
   Transaction,
   UserPreferences,
 } from '../shared/models/finance.model';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
 import {
   AddGroupTransactionPayload,
   AddTransactionPayload,
   AddUserPreferencesPayload,
+  ResponseUserPreferences,
   UpdateGroupTransactionPayload,
   UpdateTransactionPayload,
   UpdateUserPreferencesPayload,
 } from './finance.dto';
-import { safeParse } from 'valibot';
 import {
   AddGroupTransactionPayloadSchema,
   AddTransactionPayloadSchema,
@@ -171,14 +172,24 @@ export class FinanceService {
     return this.defaultCurrency;
   }
 
-  async getUserPreferences(userId: string): Promise<UserPreferences[]> {
+  async getUserPreferences(userId: string): Promise<ResponseUserPreferences> {
     if (!userId) {
       throw new HttpException('Invalid credentials', HttpStatus.BAD_REQUEST);
     }
 
     const query: any = { user_id: userId };
+    const userPreferences = await this.userPreferencesModel
+      .findOne(query)
+      .exec();
 
-    return await this.userPreferencesModel.find(query).exec();
+    if (!userPreferences) {
+      return null;
+    }
+    return {
+      currency: userPreferences.currency,
+      incomeCategories: userPreferences.incomeCategories,
+      expenseCategories: userPreferences.expenseCategories,
+    };
   }
 
   async addUserPreferences(
