@@ -5,5 +5,7 @@ export enum RouterEnum {
   logout = 'logout',
   finance = 'finance',
   settings = 'settings',
+  changePassword = 'change-password',
+  deleteAccount = 'deleteAccount',
   preferences = 'preferences',
 }

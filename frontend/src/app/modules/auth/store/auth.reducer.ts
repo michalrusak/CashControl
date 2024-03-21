@@ -1,5 +1,5 @@
-import { ResponseUser, User } from '../../core/models/auth.model';
 import { Action, createReducer, on } from '@ngrx/store';
+import { User } from '../../core/models/user.model';
 import * as AuthActions from './auth.actions';
 
 export interface AuthState {
@@ -48,6 +48,10 @@ const _authReducer = createReducer(
     ...state,
     user: null,
     error: null,
+  })),
+  on(AuthActions.UpdateUser, (state, action) => ({
+    ...state,
+    user: action.user,
   }))
 );
 

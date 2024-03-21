@@ -1,0 +1,23 @@
+@import "_extends";
+@import "_variables";
+
+.settings-container {
+  @extend .center-page;
+}
+
+.user-form {
+  @extend .form;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  margin: 25px auto;
+  gap: 30px;
+}
+
+.nested-component-conatiner {
+  width: 100%;
+}

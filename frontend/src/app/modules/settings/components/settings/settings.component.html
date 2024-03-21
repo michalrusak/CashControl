@@ -1,0 +1,37 @@
+<div class="settings-container">
+  <h2>Edit your account</h2>
+  <form [formGroup]="userSettingForm" (submit)="updateUser()" class="user-form">
+    <mat-form-field>
+      <mat-label>First name</mat-label>
+      <input autocomplete="name" type="text" matInput formControlName="firstName">
+      <mat-error *ngIf="controls.firstName.invalid">{{getErrorMessage(controls.firstName)}}</mat-error>
+
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Last name</mat-label>
+      <input name="lastName" type="text" matInput formControlName="lastName">
+      <mat-error *ngIf="controls.lastName.invalid">{{getErrorMessage(controls.lastName)}}</mat-error>
+
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>email</mat-label>
+      <input autocomplete="email" type="email" matInput formControlName="email">
+      <mat-error *ngIf="controls.email.invalid">{{getErrorMessage(controls.email)}}</mat-error>
+
+    </mat-form-field>
+
+    <button [disabled]="!activeButton" type="submit" mat-raised-button color="primary">Save</button>
+  </form>
+
+  <div class="buttons">
+    <button mat-raised-button color="primary" routerLink={{RouterEnum.changePassword}}>Change password</button>
+    <button mat-raised-button color="warn" routerLink={{RouterEnum.deleteAccount}}>Delete account</button>
+  </div>
+
+  <div class="nested-component-conatiner">
+    <router-outlet></router-outlet>
+  </div>
+
+</div>

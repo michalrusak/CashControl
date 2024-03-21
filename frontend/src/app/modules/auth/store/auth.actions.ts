@@ -1,9 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import {
-  LoginData,
-  RegisterData,
-  ResponseUser,
-} from '../../core/models/auth.model';
+import { LoginData, ResponseUser } from '../../core/models/auth.model';
+import { User } from '../../core/models/user.model';
 
 enum AuthActionType {
   LOGIN = '[Auth] Login',
@@ -15,6 +12,7 @@ enum AuthActionType {
   LOGOUT = '[Auth] Logout',
   LOGOUT_SUCCESS = '[Auth] Logout Success',
   LOGOUT_FAILURE = '[Auth] Logout Failure',
+  UPDATE_USER = '[Auth] Update User',
 }
 
 export const login = createAction(
@@ -46,3 +44,8 @@ export const logout = createAction(AuthActionType.LOGOUT);
 export const logoutSuccess = createAction(AuthActionType.LOGOUT_SUCCESS);
 
 export const logoutFailure = createAction(AuthActionType.LOGOUT_FAILURE);
+
+export const UpdateUser = createAction(
+  AuthActionType.UPDATE_USER,
+  props<{ user: User }>()
+);

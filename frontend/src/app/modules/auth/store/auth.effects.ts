@@ -20,6 +20,7 @@ export class AuthEffects {
             return AuthActions.loginSuccess({ user });
           }),
           catchError((err) => {
+            this.notifierService.notify('error', 'Login error!');
             return of(AuthActions.loginFailure({ error: err }));
           })
         );
@@ -35,7 +36,10 @@ export class AuthEffects {
           map((user) => {
             return AuthActions.autoLoginSuccess({ user });
           }),
-          catchError((err) => of(AuthActions.autoLoginFailure()))
+          catchError((err) => {
+            this.notifierService.notify('error', 'Auto login error!');
+            return of(AuthActions.autoLoginFailure());
+          })
         );
       })
     )
@@ -52,7 +56,7 @@ export class AuthEffects {
             return AuthActions.logoutSuccess();
           }),
           catchError((err) => {
-            this.notifierService.notify('warning', 'Logout failed');
+            this.notifierService.notify('error', 'Logout failed');
             return of(AuthActions.logoutFailure());
           })
         );
