@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EndPoints } from 'src/enums/endPoints.enum';
 import { environment } from 'src/environments/environment.development';
+import { Categories, UserPreferences } from '../models/preferences.model';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +12,8 @@ export class PreferencesService {
   apiURL = `${environment.apiURL}/${EndPoints.finance}`;
   constructor(private http: HttpClient) {}
 
-  getDefaultCurrencies(): Observable<any> {
-    return this.http.get<any>(
+  getDefaultCurrencies(): Observable<Categories> {
+    return this.http.get<Categories>(
       `${this.apiURL}/${EndPoints.getDefaultCurrency}`,
       {
         withCredentials: true,
@@ -20,8 +21,8 @@ export class PreferencesService {
     );
   }
 
-  getDefaultIncomeCategories(): Observable<any> {
-    return this.http.get<any>(
+  getDefaultIncomeCategories(): Observable<Categories> {
+    return this.http.get<Categories>(
       `${this.apiURL}/${EndPoints.getDefaultIncomeCategories}`,
       {
         withCredentials: true,
@@ -29,8 +30,8 @@ export class PreferencesService {
     );
   }
 
-  getDefaultExpenseCategories(): Observable<any> {
-    return this.http.get<any>(
+  getDefaultExpenseCategories(): Observable<Categories> {
+    return this.http.get<Categories>(
       `${this.apiURL}/${EndPoints.getDefaultExpenseCategories}`,
       {
         withCredentials: true,
@@ -38,8 +39,8 @@ export class PreferencesService {
     );
   }
 
-  addUserPreferences(body: any): Observable<any> {
-    return this.http.post<any>(
+  addUserPreferences(body: UserPreferences): Observable<UserPreferences> {
+    return this.http.post<UserPreferences>(
       `${this.apiURL}/${EndPoints.userPreferences}`,
       body,
       {
@@ -48,8 +49,8 @@ export class PreferencesService {
     );
   }
 
-  updateUserPreferences(body: any): Observable<any> {
-    return this.http.patch<any>(
+  updateUserPreferences(body: UserPreferences): Observable<UserPreferences> {
+    return this.http.patch<UserPreferences>(
       `${this.apiURL}/${EndPoints.userPreferences}`,
       body,
       {
@@ -58,9 +59,12 @@ export class PreferencesService {
     );
   }
 
-  getUserPreferences(): Observable<any> {
-    return this.http.get<any>(`${this.apiURL}/${EndPoints.userPreferences}`, {
-      withCredentials: true,
-    });
+  getUserPreferences(): Observable<UserPreferences> {
+    return this.http.get<UserPreferences>(
+      `${this.apiURL}/${EndPoints.userPreferences}`,
+      {
+        withCredentials: true,
+      }
+    );
   }
 }

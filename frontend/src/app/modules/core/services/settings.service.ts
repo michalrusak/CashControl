@@ -3,7 +3,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EndPoints } from 'src/enums/endPoints.enum';
 import { environment } from 'src/environments/environment.development';
-import { UpdateUserPayload, ChangePasswordPayload } from '../models/user.model';
+import {
+  UpdateUserPayload,
+  ChangePasswordPayload,
+  User,
+} from '../models/user.model';
+import { MessageResponse } from '../models/response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -12,26 +17,26 @@ export class SettingsService {
   apiURL = `${environment.apiURL}/${EndPoints.user}`;
   constructor(private http: HttpClient) {}
 
-  getUserInfo(): Observable<any> {
-    return this.http.get<any>(`${this.apiURL}/`, {
+  getUserInfo(): Observable<User> {
+    return this.http.get<User>(`${this.apiURL}/`, {
       withCredentials: true,
     });
   }
 
-  updateUser(body: UpdateUserPayload): Observable<any> {
-    return this.http.patch<UpdateUserPayload>(`${this.apiURL}/`, body, {
+  updateUser(body: UpdateUserPayload): Observable<MessageResponse> {
+    return this.http.patch<MessageResponse>(`${this.apiURL}/`, body, {
       withCredentials: true,
     });
   }
 
-  changePassword(body: ChangePasswordPayload): Observable<any> {
-    return this.http.post<ChangePasswordPayload>(`${this.apiURL}/`, body, {
+  changePassword(body: ChangePasswordPayload): Observable<MessageResponse> {
+    return this.http.post<MessageResponse>(`${this.apiURL}/`, body, {
       withCredentials: true,
     });
   }
 
-  deleteAccount(): Observable<any> {
-    return this.http.delete<any>(`${this.apiURL}/`, {
+  deleteAccount(): Observable<MessageResponse> {
+    return this.http.delete<MessageResponse>(`${this.apiURL}/`, {
       withCredentials: true,
     });
   }

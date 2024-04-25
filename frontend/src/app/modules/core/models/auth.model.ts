@@ -15,7 +15,3 @@ export interface RegisterData {
 export interface ResponseUser {
   user: User;
 }
-
-export interface ResponseMessage {
-  message: string;
-}

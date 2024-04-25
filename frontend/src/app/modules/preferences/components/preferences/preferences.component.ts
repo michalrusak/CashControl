@@ -146,7 +146,7 @@ export class PreferencesComponent implements OnInit, OnDestroy, DoCheck {
     });
   }
 
-  fillFormWithUserPreferences(userPreferences: any): void {
+  fillFormWithUserPreferences(userPreferences: UserPreferences): void {
     this.preferencesForm.patchValue({
       currency: userPreferences.currency,
     });

@@ -3,3 +3,5 @@ export interface UserPreferences {
   incomeCategories: string[];
   expenseCategories: string[];
 }
+
+export type Categories = string[];

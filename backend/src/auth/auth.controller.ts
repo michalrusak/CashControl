@@ -12,13 +12,14 @@ import { AuthService } from './auth.service';
 import { Response } from 'express';
 import { Cookies } from 'src/enums/cookies.enum';
 import { LoginPayload, RegisterPayload } from './auth.dto';
+import { MessageResponse } from 'src/shared/models/response.model';
 
 @Controller(EndPoints.auth)
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post(EndPoints.register)
-  async register(@Body() payload: RegisterPayload): Promise<any> {
+  async register(@Body() payload: RegisterPayload): Promise<MessageResponse> {
     await this.authService.register(payload);
     return { message: 'User registered successfully' };
   }
