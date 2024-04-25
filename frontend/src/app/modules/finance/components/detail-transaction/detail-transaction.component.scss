@@ -1,0 +1,19 @@
+@import "_extends";
+@import "_variables";
+
+.transaction-detail-container {
+  @extend .center-page;
+  justify-content: flex-start;
+}
+
+.table {
+  padding: 20px;
+
+  td {
+    padding: 4px 10px;
+  }
+}
+
+.buttons {
+  justify-content: center;
+}

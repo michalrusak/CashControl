@@ -15,6 +15,7 @@ import { AuthEffects } from './modules/auth/store/auth.effects';
 import { NotifierOptions, NotifierModule } from 'angular-notifier';
 import { PreferencesModule } from './modules/preferences/preferences.module';
 import { SettingsModule } from './modules/settings/settings.module';
+import { FinanceModule } from './modules/finance/finance.module';
 
 const customNotifier: NotifierOptions = {
   position: {
@@ -42,6 +43,7 @@ const customNotifier: NotifierOptions = {
     AuthModule,
     PreferencesModule,
     SettingsModule,
+    FinanceModule,
     StoreModule.forRoot({ auth: authReducer }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     EffectsModule.forRoot(AuthEffects),

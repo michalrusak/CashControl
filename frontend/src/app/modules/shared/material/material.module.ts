@@ -8,6 +8,11 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [],
@@ -21,6 +26,11 @@ import { MatSelectModule } from '@angular/material/select';
     MatCheckboxModule,
     MatCardModule,
     MatSelectModule,
+    MatDatepickerModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSortModule,
+    MatNativeDateModule,
   ],
 })
 export class MaterialModule {}

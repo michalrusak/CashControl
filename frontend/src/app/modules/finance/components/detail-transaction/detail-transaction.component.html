@@ -1,0 +1,64 @@
+<div class="transaction-detail-container">
+  <table class="table" *ngIf="transaction">
+    <tbody>
+      <tr>
+        <td><strong>ID:</strong></td>
+        <td>{{ transaction._id }}</td>
+      </tr>
+      <tr>
+        <td><strong>User ID:</strong></td>
+        <td>{{ transaction.user_id }}</td>
+      </tr>
+      <tr>
+        <td><strong>Type:</strong></td>
+        <td>{{ transaction.type }}</td>
+      </tr>
+      <tr>
+        <td><strong>Amount:</strong></td>
+        <td>{{ transaction.amount }}</td>
+      </tr>
+      <tr>
+        <td><strong>Category:</strong></td>
+        <td>{{ transaction.category }}</td>
+      </tr>
+      <tr>
+        <td><strong>Description:</strong></td>
+        <td>{{ transaction.description }}</td>
+      </tr>
+      <tr>
+        <td><strong>Date:</strong></td>
+        <td>{{ transaction.date | date }}</td>
+      </tr>
+
+      <tr>
+        <td><strong>Created date:</strong></td>
+        <td>{{ transaction.createdAt | date }}</td>
+      </tr>
+
+      <tr>
+        <td><strong>Update date:</strong></td>
+        <td>{{ transaction.updatedAt ? (transaction.updatedAt  | date) : 'Not updated'}}</td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <div *ngIf="!transaction">
+    Sorry, transaction not found.
+  </div>
+
+  <h4>Modify this transaction</h4>
+  <div class="buttons">
+    <button mat-raised-button color="primary" routerLink="/{{RouterEnum.editTransaction}}/{{id_transaction}}">Edit
+      transaction</button>
+    <button mat-raised-button color="warn" routerLink="/{{RouterEnum.deleteTransaction}}/{{id_transaction}}">Delete
+      transaction</button>
+
+
+  </div>
+  <h4>Download this transaction</h4>
+  <div class="buttons">
+    <button mat-raised-button color="primary">Download JSON</button>
+    <button mat-raised-button color="primary">Download PDF</button>
+  </div>
+</div>

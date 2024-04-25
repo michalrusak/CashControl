@@ -7,7 +7,9 @@ export const TransactionSchema = new mongoose.Schema({
   type: { type: String, enum: [Finance.expense, Finance.income] },
   amount: Number,
   category: String,
-  date: { type: Date, default: Date.now },
+  date: Date,
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: null },
   description: String,
 });
 
@@ -17,6 +19,8 @@ export interface Transaction extends mongoose.Document {
   amount: number;
   category: string;
   date: Date;
+  createdAt: Date;
+  updatedAt: Date;
   description: string;
 }
 

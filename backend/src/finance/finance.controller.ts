@@ -1,4 +1,16 @@
-import { Body, Controller, Get, Patch, Post, Query, Req } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpStatus,
+  Param,
+  Patch,
+  Post,
+  Query,
+  Req,
+  Res,
+} from '@nestjs/common';
 import { EndPoints } from 'src/enums/endPoints.enum';
 import { FinanceService } from './finance.service';
 import {
@@ -10,10 +22,18 @@ import {
   UpdateUserPreferencesPayload,
 } from './finance.dto';
 import { Queries } from 'src/enums/query.enum';
+import { Transaction } from 'src/shared/models/finance.model';
+import { Response } from 'express';
 
 @Controller(EndPoints.finance)
 export class FinanceController {
   constructor(private readonly financeService: FinanceService) {}
+
+  @Get(`${EndPoints.transaction}/:id`)
+  async findTransactionById(@Param('id') id: string): Promise<Transaction> {
+    return await this.financeService.findTransactionById(id);
+  }
+
   @Get(EndPoints.transaction)
   async findAllUserTransactions(
     @Req() req,
@@ -50,6 +70,14 @@ export class FinanceController {
   @Patch(EndPoints.transaction)
   async updateTransaction(@Body() payload: UpdateTransactionPayload) {
     return await this.financeService.updateTransaction(payload);
+  }
+
+  @Delete(`${EndPoints.transaction}/:id`)
+  async deleteTransaction(@Param('id') id: string, @Res() res: Response) {
+    await this.financeService.deleteTransaction(id);
+    return res
+      .status(HttpStatus.OK)
+      .json({ message: 'Transaction deleted successfully' });
   }
 
   @Get(EndPoints.getDefaultExpenseCategories)

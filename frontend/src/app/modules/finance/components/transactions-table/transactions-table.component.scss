@@ -1,0 +1,15 @@
+@import "_extends";
+@import "_variables";
+
+.finance-container {
+  @extend .center-page;
+  justify-content: flex-start;
+}
+
+.table {
+  padding: 10px 20px;
+}
+.buttons {
+  justify-content: flex-end;
+  margin-bottom: 5px;
+}

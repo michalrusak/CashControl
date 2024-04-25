@@ -1,0 +1,60 @@
+<div class="finance-container">
+
+  <div class="buttons">
+    <button mat-raised-button color="primary" routerLink="/{{RouterEnum.addTransaction}}">Add
+      transaction</button>
+
+    <button mat-raised-button color="primary" routerLink="/{{RouterEnum.dataTransfer}}">Export or import data</button>
+  </div>
+
+  <table class="table" [dataSource]="dataSource" mat-table matSort>
+
+    <ng-container matColumnDef="lp">
+      <th *matHeaderCellDef mat-header-cell> Lp.</th>
+      <td *matCellDef="let row; index as i" mat-cell> {{ i + 1 }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="category">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header> Category</th>
+      <td *matCellDef="let row" mat-cell> {{row.category}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header> Description</th>
+      <td *matCellDef="let row" mat-cell> {{row.description}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header> Type</th>
+      <td *matCellDef="let row" mat-cell> {{row.type}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header> Amount</th>
+      <td *matCellDef="let row" mat-cell> {{row.amount}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header> Date</th>
+      <td *matCellDef="let row" mat-cell> {{row.date}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="details">
+      <th *matHeaderCellDef mat-header-cell>Details</th>
+      <td *matCellDef="let row" mat-cell>
+        <button routerLink="/{{RouterEnum.detailTransaction}}/{{row._id}}" color="primary"
+          mat-raised-button>Details</button>
+      </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+  </table>
+
+  <div *ngIf="!count">
+    Not found transaction
+  </div>
+
+  <mat-paginator [length]="count" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Page"></mat-paginator>
+
+</div>

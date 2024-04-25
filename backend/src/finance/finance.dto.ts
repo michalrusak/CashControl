@@ -5,6 +5,7 @@ export type AddTransactionPayload = {
   amount: number;
   category: string;
   description: string;
+  date: Date;
 };
 
 export interface UpdateTransactionPayload

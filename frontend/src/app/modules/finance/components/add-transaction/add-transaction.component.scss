@@ -1,0 +1,21 @@
+@import "_extends";
+@import "_variables";
+
+.add-transaction-container {
+  @extend .center-page;
+}
+
+.form {
+  @extend .form;
+  gap: 30px;
+}
+
+.label {
+  @extend .label-title;
+}
+
+@media (orientation: portrait) or (max-width: map-get($grid-breakpoints, lg)) {
+  .form {
+    width: 100%;
+  }
+}

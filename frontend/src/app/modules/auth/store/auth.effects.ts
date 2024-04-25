@@ -15,7 +15,7 @@ export class AuthEffects {
       switchMap((action) => {
         return this.authService.login(action.loginData).pipe(
           map((user) => {
-            this.router.navigate([RouterEnum.finance]);
+            this.router.navigate([RouterEnum.transactions]);
             this.notifierService.notify('success', 'Login success!');
             return AuthActions.loginSuccess({ user });
           }),

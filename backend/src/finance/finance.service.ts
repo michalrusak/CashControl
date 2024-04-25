@@ -47,6 +47,14 @@ export class FinanceService {
   ];
   private defaultCurrency = ['PLN', 'USD', 'EURO'];
 
+  async findTransactionById(id: string): Promise<Transaction> {
+    const transaction = await this.transactionModel.findById(id).exec();
+    if (!transaction) {
+      throw new HttpException('Transaction not found', HttpStatus.NOT_FOUND);
+    }
+    return transaction;
+  }
+
   async findAllUserTransactions(
     userId: string,
     fromDate?: Date,
@@ -57,7 +65,7 @@ export class FinanceService {
     minAmount?: number,
     maxAmount?: number,
     category?: string,
-  ): Promise<Transaction[]> {
+  ): Promise<{ transactions: Transaction[]; count: number }> {
     if (!userId) {
       throw new HttpException('Invalid credentials', HttpStatus.BAD_REQUEST);
     }
@@ -86,11 +94,15 @@ export class FinanceService {
 
     const offset = (page - 1) * limit;
 
-    return await this.transactionModel
+    const transactions = await this.transactionModel
       .find(query)
       .skip(offset)
       .limit(limit)
       .exec();
+
+    const countElements = await this.transactionModel.countDocuments(query);
+
+    return { transactions, count: countElements };
   }
 
   async createTransaction(
@@ -116,7 +128,8 @@ export class FinanceService {
       amount: addTransactionPayload.amount,
       category: addTransactionPayload.category,
       description: addTransactionPayload.description,
-      date: new Date(),
+      date: addTransactionPayload.date,
+      createdAt: new Date(),
     });
     return await newTransaction.save();
   }
@@ -157,7 +170,27 @@ export class FinanceService {
       existingTransaction.type = updateTransactionPayload.type;
     }
 
+    if (updateTransactionPayload.date) {
+      existingTransaction.date = updateTransactionPayload.date;
+    }
+
+    existingTransaction.updatedAt = new Date();
+
     return await existingTransaction.save();
+  }
+
+  async deleteTransaction(id_transaction: string) {
+    if (!id_transaction) {
+      throw new HttpException('Invalid credentials', HttpStatus.BAD_REQUEST);
+    }
+
+    const existingTransaction = await this.transactionModel.findOneAndDelete({
+      _id: id_transaction,
+    });
+
+    if (!existingTransaction) {
+      throw new HttpException('Transaction not found', HttpStatus.NOT_FOUND);
+    }
   }
 
   getDefaultIncomeCategories() {

@@ -15,6 +15,7 @@ export const AddTransactionPayloadSchema = object({
   amount: number([minValue(0.1)]),
   category: string([minLength(1)]),
   description: optional(string([minLength(1)])),
+  date: string(),
 });
 
 export const UpdateTransactionPayloadSchema = object({
@@ -23,6 +24,7 @@ export const UpdateTransactionPayloadSchema = object({
   amount: optional(number([minValue(0.1)])),
   category: optional(string([minLength(1)])),
   description: optional(string([minLength(1)])),
+  date: optional(string()),
 });
 
 export const AddUserPreferencesPayloadSchema = object({
