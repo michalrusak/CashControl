@@ -16,7 +16,7 @@ export type Transaction = {
 export type AddTransaction = Omit<Transaction, '_id' | 'user_id'>;
 
 export interface AllTransactionsResponse {
-  transactions: Transaction[];
+  transactions: DetailsTransaction[];
   count: number;
 }
 

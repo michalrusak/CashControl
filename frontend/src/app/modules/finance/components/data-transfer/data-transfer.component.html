@@ -1,17 +1,12 @@
 <div class="data-transfer-container">
-  <h4>Import data:</h4>
+  <!-- <h4>Import data:</h4>
   <div class="buttons">
     <button mat-raised-button color="primary">Import JSON</button>
-  </div>
+  </div> -->
   <h4>Download all transactions:</h4>
+  <!-- <div class="filtration"></div> -->
   <div class="buttons">
-    <button mat-raised-button color="primary">Download JSON</button>
-    <button mat-raised-button color="primary">Download PDF</button>
-  </div>
-
-  <h4>Download all transactions with filtration:</h4>
-  <div class="buttons">
-    <button mat-raised-button color="primary">Download JSON</button>
-    <button mat-raised-button color="primary">Download PDF</button>
+    <button mat-raised-button color="primary" (click)="downloadAllTransactionsToJSON()">Download JSON</button>
+    <button mat-raised-button color="primary" (click)="downloadAllTransactionToPDF()">Download PDF</button>
   </div>
 </div>

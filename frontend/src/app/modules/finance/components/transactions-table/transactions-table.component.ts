@@ -2,10 +2,20 @@ import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Store } from '@ngrx/store';
 import { NotifierService } from 'angular-notifier';
-import { Subscription, map, merge, startWith, switchMap } from 'rxjs';
+import {
+  Observable,
+  Subscription,
+  map,
+  merge,
+  startWith,
+  switchMap,
+} from 'rxjs';
 import { Transaction } from 'src/app/modules/core/models/transaction.model';
 import { FinanceService } from 'src/app/modules/core/services/finance.service';
+import { selectCurrency } from 'src/app/modules/preferences/store/preferences.selector';
+import { AppState } from 'src/app/store/app.reducer';
 import { RouterEnum } from 'src/enums/router.enum';
 
 @Component({
@@ -18,6 +28,8 @@ export class TransacationsTableComponent implements OnDestroy, AfterViewInit {
   RouterEnum = RouterEnum;
   count: number = 0;
   dataSource!: MatTableDataSource<Transaction>;
+
+  currency$: Observable<string> = this.store.select(selectCurrency);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -33,7 +45,8 @@ export class TransacationsTableComponent implements OnDestroy, AfterViewInit {
 
   constructor(
     private financeService: FinanceService,
-    private notifierService: NotifierService
+    private notifierService: NotifierService,
+    private store: Store<AppState>
   ) {}
   ngAfterViewInit(): void {
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));

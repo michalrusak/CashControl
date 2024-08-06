@@ -31,7 +31,7 @@
 
     <ng-container matColumnDef="amount">
       <th *matHeaderCellDef mat-header-cell mat-sort-header> Amount</th>
-      <td *matCellDef="let row" mat-cell> {{row.amount}} </td>
+      <td *matCellDef="let row" mat-cell> {{row.amount}} {{currency$ | async}} </td>
     </ng-container>
 
     <ng-container matColumnDef="date">

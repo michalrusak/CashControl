@@ -30,7 +30,7 @@
 
     <div class="form-group">
       <mat-form-field>
-        <mat-label>Amount</mat-label>
+        <mat-label>Amount ({{currency$ | async}})</mat-label>
         <input type="number" matInput formControlName="amount">
         <mat-error *ngIf="controls.amount.invalid">{{getErrorMessage(controls.amount)}}</mat-error>
       </mat-form-field>

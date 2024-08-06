@@ -15,7 +15,7 @@
       </tr>
       <tr>
         <td><strong>Amount:</strong></td>
-        <td>{{ transaction.amount }}</td>
+        <td>{{ transaction.amount }} {{currency$ | async}}</td>
       </tr>
       <tr>
         <td><strong>Category:</strong></td>
@@ -58,7 +58,7 @@
   </div>
   <h4>Download this transaction</h4>
   <div class="buttons">
-    <button mat-raised-button color="primary">Download JSON</button>
-    <button mat-raised-button color="primary">Download PDF</button>
+    <button mat-raised-button color="primary" (click)="downloadTransactionToJSON()">Download JSON</button>
+    <button mat-raised-button color="primary" (click)="downloadTransactionToPDF()">Download PDF</button>
   </div>
 </div>

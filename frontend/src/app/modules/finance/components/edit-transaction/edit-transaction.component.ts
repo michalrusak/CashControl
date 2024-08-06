@@ -1,8 +1,9 @@
 import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { NotifierService } from 'angular-notifier';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import {
   DetailsTransaction,
   Finance,
@@ -11,6 +12,8 @@ import {
 } from 'src/app/modules/core/models/transaction.model';
 import { FinanceService } from 'src/app/modules/core/services/finance.service';
 import { PreferencesService } from 'src/app/modules/core/services/preferences.service';
+import { selectCurrency } from 'src/app/modules/preferences/store/preferences.selector';
+import { AppState } from 'src/app/store/app.reducer';
 import { RouterEnum } from 'src/enums/router.enum';
 
 @Component({
@@ -27,6 +30,7 @@ export class EditTransactionComponent implements OnInit, OnDestroy, DoCheck {
   transaction!: DetailsTransaction;
   id_transaction!: string;
   activeButton: boolean = false;
+  currency$: Observable<string> = this.store.select(selectCurrency);
 
   RouterEnum = RouterEnum;
 
@@ -35,7 +39,8 @@ export class EditTransactionComponent implements OnInit, OnDestroy, DoCheck {
     private preferencesService: PreferencesService,
     private notifierService: NotifierService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private store: Store<AppState>
   ) {}
 
   form = new FormGroup({

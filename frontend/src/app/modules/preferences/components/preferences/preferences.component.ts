@@ -4,6 +4,9 @@ import { NotifierService } from 'angular-notifier';
 import { Subscription } from 'rxjs';
 import { UserPreferences } from 'src/app/modules/core/models/preferences.model';
 import { PreferencesService } from 'src/app/modules/core/services/preferences.service';
+import * as PreferencesActions from '../../store/preferences.actions';
+import { AppState } from 'src/app/store/app.reducer';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-preferences',
@@ -29,7 +32,8 @@ export class PreferencesComponent implements OnInit, OnDestroy, DoCheck {
   constructor(
     private preferencesService: PreferencesService,
     private formBuilder: FormBuilder,
-    private notifierService: NotifierService
+    private notifierService: NotifierService,
+    private store: Store<AppState>
   ) {
     this.preferencesForm = this.formBuilder.group({
       expenseCategories: [[], Validators.required],
@@ -205,6 +209,7 @@ export class PreferencesComponent implements OnInit, OnDestroy, DoCheck {
         .updateUserPreferences(updatedPreferences)
         .subscribe({
           next: () => {
+            this.store.dispatch(PreferencesActions.getCurrency());
             this.notifierService.notify('success', 'Updated user preferences!');
           },
           error: (err) => this.notifierService.notify('error', 'Try again!'),

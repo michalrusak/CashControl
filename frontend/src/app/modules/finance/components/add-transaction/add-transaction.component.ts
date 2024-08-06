@@ -1,11 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { NotifierService } from 'angular-notifier';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Finance } from 'src/app/modules/core/models/transaction.model';
 import { FinanceService } from 'src/app/modules/core/services/finance.service';
 import { PreferencesService } from 'src/app/modules/core/services/preferences.service';
+import { selectCurrency } from 'src/app/modules/preferences/store/preferences.selector';
+import { AppState } from 'src/app/store/app.reducer';
 import { RouterEnum } from 'src/enums/router.enum';
 
 @Component({
@@ -20,12 +23,14 @@ export class AddTransactionComponent implements OnInit, OnDestroy {
   expenseCategories!: string[];
   categories!: string[];
   RouterEnum = RouterEnum;
+  currency$: Observable<string> = this.store.select(selectCurrency);
 
   constructor(
     private financeService: FinanceService,
     private preferencesService: PreferencesService,
     private notifierService: NotifierService,
-    private router: Router
+    private router: Router,
+    private store: Store<AppState>
   ) {}
 
   form = new FormGroup({
