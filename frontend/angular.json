@@ -25,12 +25,13 @@
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
+              "src/styles/base/_normalize.scss",
               "@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
+              "src/styles/styles.scss"
             ],
             "scripts": [],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/styles/utils"]
+              "includePaths": ["src/styles"]
             }
           },
           "configurations": {
@@ -92,10 +93,14 @@
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
+              "src/styles/base/_normalize.scss",
               "@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
+              "src/styles/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/styles"]
+            }
           }
         }
       }

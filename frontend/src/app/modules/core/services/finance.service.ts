@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Injectable } from '@angular/core';
+import jsPDF from 'jspdf';
+import { Observable } from 'rxjs';
 import { EndPoints } from 'src/enums/endPoints.enum';
 import { environment } from 'src/environments/environment.development';
 import { MessageResponse } from '../models/response.model';
@@ -10,10 +11,6 @@ import {
   DetailsTransaction,
   UpdateTransactionPayload,
 } from '../models/transaction.model';
-import jsPDF from 'jspdf';
-import { AppState } from 'src/app/store/app.reducer';
-import { Store } from '@ngrx/store';
-import { selectCurrency } from '../../preferences/store/preferences.selector';
 
 @Injectable({
   providedIn: 'root',
