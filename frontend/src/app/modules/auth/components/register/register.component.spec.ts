@@ -1,5 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+import { NotifierModule } from 'angular-notifier';
+import { MaterialModule } from 'src/app/modules/shared/material/material.module';
 import { RegisterComponent } from './register.component';
 
 describe('RegisterComponent', () => {
@@ -8,7 +13,15 @@ describe('RegisterComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [RegisterComponent]
+      declarations: [RegisterComponent],
+      imports: [
+        ReactiveFormsModule,
+        HttpClientTestingModule,
+        RouterModule.forRoot([]),
+        MaterialModule,
+        NoopAnimationsModule,
+        NotifierModule,
+      ],
     });
     fixture = TestBed.createComponent(RegisterComponent);
     component = fixture.componentInstance;
