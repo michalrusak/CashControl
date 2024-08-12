@@ -1,5 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/modules/core/models/user.model';
@@ -18,7 +19,8 @@ export class ChangePasswordComponent implements OnDestroy {
 
   constructor(
     private settingsService: SettingsService,
-    private notifierService: NotifierService
+    private notifierService: NotifierService,
+    private router: Router
   ) {}
 
   changePasswordForm = new FormGroup({
@@ -71,10 +73,11 @@ export class ChangePasswordComponent implements OnDestroy {
   }
 
   changePassword() {
-    if (
+    const isPasswordSame =
       this.changePasswordForm.getRawValue().newPassword ===
-      this.changePasswordForm.getRawValue().repeatNewPassword
-    ) {
+      this.changePasswordForm.getRawValue().repeatNewPassword;
+
+    if (isPasswordSame) {
       this.sub.add(
         this.settingsService
           .changePassword({
@@ -85,6 +88,8 @@ export class ChangePasswordComponent implements OnDestroy {
           .subscribe({
             next: (res) => {
               this.notifierService.notify('success', 'Password was changed');
+              this.changePasswordForm.markAsPristine();
+              this.router.navigate([RouterEnum.home]);
             },
             error: (err) => {
               this.notifierService.notify('error', 'Error');

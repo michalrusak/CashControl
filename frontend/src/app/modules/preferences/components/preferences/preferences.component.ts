@@ -7,6 +7,8 @@ import { PreferencesService } from 'src/app/modules/core/services/preferences.se
 import * as PreferencesActions from '../../store/preferences.actions';
 import { AppState } from 'src/app/store/app.reducer';
 import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
+import { RouterEnum } from 'src/enums/router.enum';
 
 @Component({
   selector: 'app-preferences',
@@ -33,7 +35,8 @@ export class PreferencesComponent implements OnInit, OnDestroy, DoCheck {
     private preferencesService: PreferencesService,
     private formBuilder: FormBuilder,
     private notifierService: NotifierService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private router: Router
   ) {
     this.preferencesForm = this.formBuilder.group({
       expenseCategories: [[], Validators.required],
@@ -211,6 +214,8 @@ export class PreferencesComponent implements OnInit, OnDestroy, DoCheck {
           next: () => {
             this.store.dispatch(PreferencesActions.getCurrency());
             this.notifierService.notify('success', 'Updated user preferences!');
+            this.activeButton = false;
+            this.router.navigate([RouterEnum.transactions]);
           },
           error: (err) => this.notifierService.notify('error', 'Try again!'),
         });
@@ -225,6 +230,8 @@ export class PreferencesComponent implements OnInit, OnDestroy, DoCheck {
           next: () => {
             this.notifierService.notify('success', 'Added user preferences!');
             this.preferencesAdded = true;
+            this.activeButton = false;
+            this.router.navigate([RouterEnum.transactions]);
           },
           error: (err) => this.notifierService.notify('error', 'Try again!'),
         });

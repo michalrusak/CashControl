@@ -11,6 +11,7 @@ import { SettingsService } from 'src/app/modules/core/services/settings.service'
 import { AppState } from 'src/app/store/app.reducer';
 import { RouterEnum } from 'src/enums/router.enum';
 import * as AuthActions from '../../../auth/store/auth.actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-settings',
@@ -26,7 +27,8 @@ export class SettingsComponent implements OnInit, OnDestroy, DoCheck {
   constructor(
     private settingsService: SettingsService,
     private notifierService: NotifierService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private router: Router
   ) {}
 
   userSettingForm = new FormGroup({
@@ -131,6 +133,7 @@ export class SettingsComponent implements OnInit, OnDestroy, DoCheck {
         this.store.dispatch(
           AuthActions.UpdateUser({ user: this.userSettingForm.getRawValue() })
         );
+        this.router.navigate([RouterEnum.home]);
       },
       error: (err) => this.notifierService.notify('error', 'Try again!'),
     });

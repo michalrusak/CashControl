@@ -118,6 +118,7 @@ export class AddTransactionComponent implements OnInit, OnDestroy {
       this.financeService.addTransaction(this.form.getRawValue()).subscribe({
         next: () => {
           this.notifierService.notify('success', 'Transaction added!');
+          this.form.markAsPristine();
           this.router.navigate([RouterEnum.transactions]);
         },
         error: () => {

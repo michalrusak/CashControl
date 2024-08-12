@@ -140,6 +140,7 @@ export class EditTransactionComponent implements OnInit, OnDestroy, DoCheck {
 
   checkActiveButton() {
     if (!this.transaction) return;
+
     if (this.form.invalid) {
       this.activeButton = false;
       return;
@@ -152,7 +153,7 @@ export class EditTransactionComponent implements OnInit, OnDestroy, DoCheck {
       this.form.value.description === this.transaction.description &&
       this.form.value.type === this.transaction.type;
 
-    this.activeButton = isUpdated;
+    this.activeButton = !isUpdated;
   }
 
   onSubmit() {
@@ -178,6 +179,7 @@ export class EditTransactionComponent implements OnInit, OnDestroy, DoCheck {
       this.financeService.updateTransaction(NewChangedData).subscribe({
         next: () => {
           this.notifierService.notify('success', 'Transaction edit success!');
+          this.activeButton = false;
           this.router.navigate([RouterEnum.transactions]);
         },
         error: () => {

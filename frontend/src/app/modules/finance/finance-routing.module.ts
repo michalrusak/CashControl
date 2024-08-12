@@ -8,6 +8,7 @@ import { DeleteTransactionComponent } from './components/delete-transaction/dele
 import { DataTransferComponent } from './components/data-transfer/data-transfer.component';
 import { EditTransactionComponent } from './components/edit-transaction/edit-transaction.component';
 import { authGuard } from '../core/guards/auth.guard';
+import { formCanDeactivateGuard } from '../core/guards/form-can-deactivate.guard';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
     path: RouterEnum.addTransaction,
     component: AddTransactionComponent,
     canActivate: [authGuard],
+    canDeactivate: [formCanDeactivateGuard],
   },
   {
     path: RouterEnum.detailTransaction + '/:id',
@@ -29,6 +31,7 @@ const routes: Routes = [
     path: RouterEnum.editTransaction + '/:id',
     component: EditTransactionComponent,
     canActivate: [authGuard],
+    canDeactivate: [formCanDeactivateGuard],
   },
   {
     path: RouterEnum.deleteTransaction + '/:id',
