@@ -5,13 +5,18 @@ import { EndPoints } from 'src/enums/endPoints.enum';
 import { environment } from 'src/environments/environment.development';
 import { LoginData, RegisterData, ResponseUser } from '../models/auth.model';
 import { MessageResponse } from '../models/response.model';
+import { AppState } from 'src/app/store/app.reducer';
+import { Store } from '@ngrx/store';
+import { selectIsUserLogged } from '../../auth/store/auth.selector';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   apiURL = `${environment.apiURL}/${EndPoints.auth}`;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private store: Store<AppState>) {}
+
+  loggedUser$ = this.store.select(selectIsUserLogged);
 
   login(body: LoginData): Observable<ResponseUser> {
     return this.http.post<ResponseUser>(
