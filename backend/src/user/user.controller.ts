@@ -9,7 +9,7 @@ import {
   Req,
   Res,
 } from '@nestjs/common';
-import { EndPoints } from 'src/enums/endPoints.enum';
+import { EndPoints } from '../enums/endPoints.enum';
 import { UserService } from './user.service';
 import { ChangePasswordPayload, UpdateUserPayload } from './user.dto';
 import { Response } from 'express';

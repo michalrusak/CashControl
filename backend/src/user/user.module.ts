@@ -2,10 +2,10 @@ import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Database } from 'src/enums/database.enum';
-import { UserSchema } from 'src/shared/models/user.model';
-import { EndPoints } from 'src/enums/endPoints.enum';
-import { AuthMiddleware } from 'src/shared/middlewares/auth.middleware';
+import { Database } from '../enums/database.enum';
+import { UserSchema } from '../shared/models/user.model';
+import { EndPoints } from '../enums/endPoints.enum';
+import { AuthMiddleware } from '../shared/middlewares/auth.middleware';
 
 @Module({
   imports: [

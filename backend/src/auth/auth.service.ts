@@ -7,7 +7,7 @@ import * as jwt from 'jsonwebtoken';
 import { LoginPayload, RegisterPayload } from './auth.dto';
 import { safeParse } from 'valibot';
 import { LoginPayloadSchema, RegisterPayloadSchema } from './auth.schema';
-import { Database } from 'src/enums/database.enum';
+import { Database } from '../enums/database.enum';
 
 @Injectable()
 export class AuthService {

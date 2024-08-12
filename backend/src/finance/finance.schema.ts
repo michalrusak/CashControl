@@ -1,4 +1,4 @@
-import { Finance } from 'src/enums/finance.enum';
+import { Finance } from '../enums/finance.enum';
 import {
   array,
   minLength,

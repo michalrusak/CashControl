@@ -1,8 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Database } from 'src/enums/database.enum';
-import { User } from 'src/shared/models/user.model';
+import { Database } from '../enums/database.enum';
+import { User } from '../shared/models/user.model';
 import { ChangePasswordPayload, UpdateUserPayload } from './user.dto';
 import {
   ChangePasswordPayloadSchema,

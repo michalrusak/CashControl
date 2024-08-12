@@ -11,7 +11,7 @@ import {
   Req,
   Res,
 } from '@nestjs/common';
-import { EndPoints } from 'src/enums/endPoints.enum';
+import { EndPoints } from '../enums/endpoints.enum';
 import { FinanceService } from './finance.service';
 import {
   AddGroupTransactionPayload,
@@ -21,8 +21,8 @@ import {
   UpdateTransactionPayload,
   UpdateUserPreferencesPayload,
 } from './finance.dto';
-import { Queries } from 'src/enums/query.enum';
-import { Transaction } from 'src/shared/models/finance.model';
+import { Queries } from '../enums/query.enum';
+import { Transaction } from '../shared/models/finance.model';
 import { Response } from 'express';
 
 @Controller(EndPoints.finance)

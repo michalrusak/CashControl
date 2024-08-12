@@ -2,14 +2,14 @@ import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { FinanceController } from './finance.controller';
 import { FinanceService } from './finance.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Database } from 'src/enums/database.enum';
+import { Database } from '../enums/database.enum';
 import {
   GroupTransactionSchema,
   TransactionSchema,
   UserPreferencesSchema,
 } from '../shared/models/finance.model';
-import { AuthMiddleware } from 'src/shared/middlewares/auth.middleware';
-import { EndPoints } from 'src/enums/endPoints.enum';
+import { AuthMiddleware } from '../shared/middlewares/auth.middleware';
+import { EndPoints } from '../enums/endPoints.enum';
 
 @Module({
   imports: [

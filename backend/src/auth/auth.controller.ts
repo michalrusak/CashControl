@@ -7,12 +7,12 @@ import {
   HttpStatus,
   Req,
 } from '@nestjs/common';
-import { EndPoints } from 'src/enums/endPoints.enum';
+import { EndPoints } from '../enums/endPoints.enum';
 import { AuthService } from './auth.service';
 import { Response } from 'express';
-import { Cookies } from 'src/enums/cookies.enum';
+import { Cookies } from '../enums/cookies.enum';
 import { LoginPayload, RegisterPayload } from './auth.dto';
-import { MessageResponse } from 'src/shared/models/response.model';
+import { MessageResponse } from '../shared/models/response.model';
 
 @Controller(EndPoints.auth)
 export class AuthController {

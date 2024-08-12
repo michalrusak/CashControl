@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import { Database } from 'src/enums/database.enum';
-import { Finance } from 'src/enums/finance.enum';
+import { Database } from '../../enums/database.enum';
+import { Finance } from '../../enums/finance.enum';
 
 export const TransactionSchema = new mongoose.Schema({
   user_id: { type: mongoose.Schema.Types.ObjectId, ref: Database.user },
