@@ -44,7 +44,7 @@ export class FinanceService {
   }
 
   addTransaction(transaction: AddTransaction): Observable<AddTransaction> {
-    return this.http.post<AddTransaction>(`${this.apiURL}/`, transaction, {
+    return this.http.post<AddTransaction>(this.apiURL, transaction, {
       withCredentials: true,
     });
   }
@@ -52,13 +52,9 @@ export class FinanceService {
   updateTransaction(
     transaction: UpdateTransactionPayload
   ): Observable<UpdateTransactionPayload> {
-    return this.http.patch<UpdateTransactionPayload>(
-      `${this.apiURL}/`,
-      transaction,
-      {
-        withCredentials: true,
-      }
-    );
+    return this.http.patch<UpdateTransactionPayload>(this.apiURL, transaction, {
+      withCredentials: true,
+    });
   }
 
   deleteTransaction(id_transaction: string): Observable<MessageResponse> {

@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { NotifierModule } from 'angular-notifier';
 import { MaterialModule } from 'src/app/modules/shared/material/material.module';
 import { RegisterComponent } from './register.component';
+import { StoreModule } from '@ngrx/store';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -18,6 +19,7 @@ describe('RegisterComponent', () => {
         ReactiveFormsModule,
         HttpClientTestingModule,
         RouterModule.forRoot([]),
+        StoreModule.forRoot({}),
         MaterialModule,
         NoopAnimationsModule,
         NotifierModule,

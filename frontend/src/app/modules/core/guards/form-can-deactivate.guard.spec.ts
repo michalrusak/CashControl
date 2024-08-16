@@ -1,11 +1,13 @@
 import { TestBed } from '@angular/core/testing';
-import { CanActivateFn } from '@angular/router';
+import { CanDeactivateFn } from '@angular/router';
 
 import { formCanDeactivateGuard } from './form-can-deactivate.guard';
 
 describe('formCanDeactivateGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) => 
-      TestBed.runInInjectionContext(() => formCanDeactivateGuard(...guardParameters));
+  const executeGuard: CanDeactivateFn<unknown> = (...guardParameters) =>
+    TestBed.runInInjectionContext(() =>
+      formCanDeactivateGuard(...guardParameters)
+    );
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

@@ -19,7 +19,6 @@ export const unAuthGuard: CanActivateFn = (route, state) => {
       }
     }),
     catchError(() => {
-      router.navigate([RouterEnum.home]);
       return of(true);
     })
   );

@@ -18,25 +18,25 @@ export class SettingsService {
   constructor(private http: HttpClient) {}
 
   getUserInfo(): Observable<User> {
-    return this.http.get<User>(`${this.apiURL}/`, {
+    return this.http.get<User>(this.apiURL, {
       withCredentials: true,
     });
   }
 
   updateUser(body: UpdateUserPayload): Observable<MessageResponse> {
-    return this.http.patch<MessageResponse>(`${this.apiURL}/`, body, {
+    return this.http.patch<MessageResponse>(this.apiURL, body, {
       withCredentials: true,
     });
   }
 
   changePassword(body: ChangePasswordPayload): Observable<MessageResponse> {
-    return this.http.post<MessageResponse>(`${this.apiURL}/`, body, {
+    return this.http.post<MessageResponse>(this.apiURL, body, {
       withCredentials: true,
     });
   }
 
   deleteAccount(): Observable<MessageResponse> {
-    return this.http.delete<MessageResponse>(`${this.apiURL}/`, {
+    return this.http.delete<MessageResponse>(this.apiURL, {
       withCredentials: true,
     });
   }
