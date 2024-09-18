@@ -130,9 +130,12 @@ export class SettingsComponent implements OnInit, OnDestroy, DoCheck {
     this.settingsService.updateUser(changedData).subscribe({
       next: () => {
         this.notifierService.notify('success', 'Updated user preferences!');
+        this.userSettingForm.markAsPristine();
+        this.activeButton = false;
         this.store.dispatch(
           AuthActions.UpdateUser({ user: this.userSettingForm.getRawValue() })
         );
+
         this.router.navigate([RouterEnum.home]);
       },
       error: (err) => this.notifierService.notify('error', 'Try again!'),

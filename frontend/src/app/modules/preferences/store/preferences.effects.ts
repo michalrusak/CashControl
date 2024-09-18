@@ -15,9 +15,9 @@ export class PreferencesEffects {
       ofType(PreferencesActions.getCurrency),
       switchMap(() => {
         return this.preferencesService.getUserPreferences().pipe(
-          map((userPrefenrences) => {
+          map((userPreferences) => {
             return PreferencesActions.getCurrencySuccess({
-              currency: userPrefenrences.currency,
+              currency: userPreferences.currency,
             });
           }),
           catchError((err) => {

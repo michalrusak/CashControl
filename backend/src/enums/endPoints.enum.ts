@@ -9,7 +9,7 @@ export enum EndPoints {
   getDefaultExpenseCategories = 'get-default-expense-categories',
   getDefaultIncomeCategories = 'get-default-income-categories',
   getDefaultCurrency = 'get-default-currency',
-  userPreferences = 'user-prefenrences',
+  userPreferences = 'user-preferences',
   groupTransaction = 'group-transaction',
   user = 'user',
 }
