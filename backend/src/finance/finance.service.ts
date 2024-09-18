@@ -174,6 +174,10 @@ export class FinanceService {
       existingTransaction.date = updateTransactionPayload.date;
     }
 
+    if (!existingTransaction.isModified) {
+      throw new HttpException('Invalid credentials', HttpStatus.BAD_REQUEST);
+    }
+
     existingTransaction.updatedAt = new Date();
 
     return await existingTransaction.save();
@@ -293,6 +297,10 @@ export class FinanceService {
         updateUserPreferencesPayload.expenseCategories;
     }
 
+    if (!existingUserPreferences.isModified) {
+      throw new HttpException('Invalid credentials', HttpStatus.BAD_REQUEST);
+    }
+
     return await existingUserPreferences.save();
   }
 
@@ -361,6 +369,10 @@ export class FinanceService {
     if (updateGroupTransactionPayload.transactions_id) {
       existingGroupTransaction.transactions_id =
         existingGroupTransaction.transactions_id;
+    }
+
+    if (!existingGroupTransaction.isModified) {
+      throw new HttpException('Invalid credentials', HttpStatus.BAD_REQUEST);
     }
 
     return await existingGroupTransaction.save();

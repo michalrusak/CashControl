@@ -66,6 +66,10 @@ export class UserService {
       existingUser.lastName = updateUserPayload.lastName;
     }
 
+    if (!existingUser.isModified) {
+      throw new HttpException('Invalid credentials', HttpStatus.BAD_REQUEST);
+    }
+
     return await existingUser.save();
   }
 

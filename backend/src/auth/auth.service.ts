@@ -22,6 +22,14 @@ export class AuthService {
       throw new HttpException('Invalid credentials', HttpStatus.BAD_REQUEST);
     }
 
+    const user = await this.userModel
+      .findOne({ email: registerPayload.email })
+      .exec();
+
+    if (user) {
+      throw new HttpException('User already exists', HttpStatus.CONFLICT);
+    }
+
     const hashedPassword = await bcrypt.hash(registerPayload.password, 10);
     const newUser = new this.userModel({
       email: registerPayload.email,
@@ -32,7 +40,7 @@ export class AuthService {
     return newUser.save();
   }
 
-  async login(loginPayload: LoginPayload): Promise<any> {
+  async login(loginPayload: LoginPayload) {
     const result = safeParse(LoginPayloadSchema, loginPayload);
 
     if (!result.success) {
@@ -42,15 +50,17 @@ export class AuthService {
     const user = await this.userModel
       .findOne({ email: loginPayload.email })
       .exec();
+
     if (!user) {
-      throw new Error('Invalid credentials');
+      throw new HttpException('Invalid credentials', HttpStatus.BAD_REQUEST);
     }
     const isPasswordValid = await bcrypt.compare(
       loginPayload.password,
       user.password,
     );
+
     if (!isPasswordValid) {
-      throw new Error('Invalid credentials');
+      throw new HttpException('Invalid credentials', HttpStatus.BAD_REQUEST);
     }
     const token = jwt.sign(
       { email: user.email, _id: user._id },
@@ -69,13 +79,13 @@ export class AuthService {
 
   async autoLogin(userId: string) {
     if (!userId) {
-      throw new HttpException('Invalid credentials', HttpStatus.BAD_REQUEST);
+      throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
     }
 
     const user = await this.userModel.findOne({ _id: userId });
 
     if (!user) {
-      throw new Error('Invalid credentials');
+      throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
     }
 
     return {
