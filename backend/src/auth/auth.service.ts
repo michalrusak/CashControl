@@ -22,16 +22,14 @@ export class AuthService {
       throw new HttpException('Invalid credentials', HttpStatus.BAD_REQUEST);
     }
 
-    const user = await this.userModel
-      .findOne({ email: registerPayload.email })
-      .exec();
+    const user = await this.userModel.findOne({ email: registerPayload.email });
 
     if (user) {
       throw new HttpException('User already exists', HttpStatus.CONFLICT);
     }
 
     const hashedPassword = await bcrypt.hash(registerPayload.password, 10);
-    const newUser = new this.userModel({
+    const newUser = await this.userModel.create({
       email: registerPayload.email,
       password: hashedPassword,
       firstName: registerPayload.firstName,
@@ -47,9 +45,7 @@ export class AuthService {
       throw new HttpException('Invalid credentials', HttpStatus.BAD_REQUEST);
     }
 
-    const user = await this.userModel
-      .findOne({ email: loginPayload.email })
-      .exec();
+    const user = await this.userModel.findOne({ email: loginPayload.email });
 
     if (!user) {
       throw new HttpException('Invalid credentials', HttpStatus.BAD_REQUEST);

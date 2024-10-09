@@ -30,7 +30,7 @@ export class AddTransactionPayload {
     description: 'Date of the transaction',
     example: '2024-09-18T14:30:00.000Z',
   })
-  date: Date;
+  date: Date | string;
 }
 
 export class UpdateTransactionPayload extends PartialType(

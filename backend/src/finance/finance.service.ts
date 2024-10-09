@@ -122,13 +122,13 @@ export class FinanceService {
       throw new HttpException('Invalid credentials', HttpStatus.BAD_REQUEST);
     }
 
-    const newTransaction = new this.transactionModel({
+    const newTransaction = await this.transactionModel.create({
       user_id: userId,
       type: addTransactionPayload.type,
       amount: addTransactionPayload.amount,
       category: addTransactionPayload.category,
       description: addTransactionPayload.description,
-      date: addTransactionPayload.date,
+      date: new Date(addTransactionPayload.date),
       createdAt: new Date(),
     });
     return await newTransaction.save();
@@ -171,7 +171,7 @@ export class FinanceService {
     }
 
     if (updateTransactionPayload.date) {
-      existingTransaction.date = updateTransactionPayload.date;
+      existingTransaction.date = new Date(updateTransactionPayload.date);
     }
 
     if (!existingTransaction.isModified) {
